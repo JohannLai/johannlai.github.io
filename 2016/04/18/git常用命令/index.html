@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>git常用命令 | Johann Lai's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/7.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">git常用命令</h1><a id="logo" href="/.">Johann Lai's Blog</a><p class="description">Stay hungry，Stay foolish.</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 文章</i></a><a href="/about/"><i class="fa fa-user"> 关于我</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">git常用命令</h1><div class="post-meta">Apr 18, 2016<span> | </span><span class="category"><a href="/categories/技术/">技术</a><a href="/categories/技术/资源/">资源</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p>##Git 是什么？</p>
+<blockquote>
+<h4 id="Git的官方定义："><a href="#Git的官方定义：" class="headerlink" title="Git的官方定义："></a>Git的官方定义：</h4><p>Git 是一个免费开源的分布式版本控制系统，被用于高速有效地处理大大小小项目中所有文件。</p>
+</blockquote>
+<p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<ul>
+<li><a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+</the></li>
+</ul>
+<hr>
+<p>#Git 常用的命令行</p>
+<hr>
+<p><code>说明</code>：&lt;必选&gt;  [可选]</p>
+<h2 id="创建仓库-Create"><a href="#创建仓库-Create" class="headerlink" title="创建仓库 Create"></a><strong>创建仓库 <code>Create</code></strong></h2><ul>
+<li><p>从已有的<code>文件</code></p>
+<p>  cd ~/project/myproject<br>  git init<br>  git add</p>
+</li>
+</ul>
+<ul>
+<li><p>从已有的<code>仓库</code></p>
+<pre><code>git clone ~/existing/repo ~/new/repo 
+git clone you@host.org:dir/project.git
+</code></pre></li>
+<li><p>为已有的本地数据文件创建远程仓库</p>
+<p>  mkdir repo.git &amp; cd repo.git </p>
+<p>  git init –bare[–shared=group]      </p>
+</li>
+</ul>
+<h2 id="浏览-Browse"><a href="#浏览-Browse" class="headerlink" title="浏览 Browse"></a><strong>浏览 <code>Browse</code></strong></h2><ul>
+<li><p>工作目录中所有发生变化的文件</p>
+<p>git status</p>
+</li>
+<li><p>已经纳入版本管理的文件所发生的变化</p>
+<p>git diff</p>
+</li>
+<li><p>在<code>ID1</code>和<code>ID2</code>之间发生的变化</p>
+<p>git log</p>
+</li>
+<li><p>变更的历史</p>
+<p>git log</p>
+</li>
+<li><p>查看带文件修改记录的变更历史 </p>
+<p>git watchanged</p>
+</li>
+<li><p>谁在什么时间修改了文件中的什么内容 </p>
+<p>git blame <file> </file></p>
+</li>
+<li><p>查看特定变更的<code>ID</code>的更新细节 </p>
+<p>git show <id> </id></p>
+</li>
+<li><p>查看特定变更<code>ID</code>中的特定文件的变更细节 </p>
+<p>git diff <id>:<file> </file></id></p>
+</li>
+<li><p>All 所有的本地分支 </p>
+<p>git branch  //带有“×” 标记的是当前分支 </p>
+</li>
+<li><p>按模式搜索 </p>
+<p>git grep <pattern> [PATH]</pattern></p>
+</li>
+</ul>
+<h2 id="分支-Branch"><a href="#分支-Branch" class="headerlink" title="分支 Branch"></a><strong>分支 <code>Branch</code></strong></h2><ul>
+<li><p>切换到分支 BRANCH </p>
+<p>git checkout <branch> </branch></p>
+</li>
+<li><p>把分支<code>B1</code>合并到分支<code>B2</code> </p>
+<p>git checkout <b2><br>git merge <b1> </b1></b2></p>
+</li>
+<li><p>在当前的<code>HEAD</code>分支上创建一个分支 </p>
+<p>git branch <branch></branch></p>
+</li>
+<li><p>在其他的分支<code>BASE</code>上创建一个新分支 <code>NEW</code> </p>
+<p>git checkout <new> <base></new></p>
+</li>
+<li><p>删除 </p>
+<p> git branch -d <branch></branch></p>
+</li>
+</ul>
+<h2 id="更新Update"><a href="#更新Update" class="headerlink" title="更新Update"></a><strong>更新<code>Update</code></strong></h2><ul>
+<li><p>从远端 <code>origin</code> 中获取最新的变更记录 </p>
+<p> git fetch //不会进行合并操作 </p>
+</li>
+<li><p>从远端 <code>origin</code> 中获取最新的变更 </p>
+<p> git pull //获取变更之后会进行合并操作 </p>
+</li>
+<li><p>应用别处获得的补丁 </p>
+<p>git am -3 patch.mbox<br>//如果发生冲突，解决之后运行下面的命令<br>git am –resolve </p>
+<h2 id="发布Publish"><a href="#发布Publish" class="headerlink" title="发布Publish"></a><strong>发布<code>Publish</code></strong></h2></li>
+<li><p>提交所有本地修改 </p>
+<p>git commit -a </p>
+</li>
+<li><p>给他人准备一个补丁 </p>
+<p>git format-patch origin</p>
+</li>
+<li><p>把变更发布到远端<code>origin</code> </p>
+<p>git push [REMOTE] [BRANCH] </p>
+</li>
+<li><p>标记一个版本或者里程碑 </p>
+<p>git tag &lt;VERSION_NAME&gt; </p>
+<h2 id="恢复Revert"><a href="#恢复Revert" class="headerlink" title="恢复Revert"></a><strong>恢复<code>Revert</code></strong></h2></li>
+<li><p>恢复到最后提交状态 </p>
+<p>git checkout -f | git reset –hard</p>
+<p>//注意：无法撤消硬重置 （hard reset）</p>
+</li>
+<li><p>撤消最后的提交 </p>
+<p>git revert HEAD<br>  //会生成新的提交记录</p>
+</li>
+<li><p>撤消特定的提交 </p>
+<p>git revert <id><br>  //会生成新的提交记录</id></p>
+</li>
+<li><p>修改特定的提交 </p>
+<p>git commit -a –amend<br>  //在编辑了一个损坏的文件之后</p>
+</li>
+<li><p>签出文件的一个特定的版本<code>ID</code> </p>
+<p>git checkout <id> <file></file></id></p>
+<blockquote>
+<p>To be  continue…</p>
+</blockquote>
+</li>
+</ul>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="http://yoursite.com/2016/04/18/git常用命令/" data-id="cjru13g0s000zjuofpfwdcc98" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQW7DMAwEQP//0ynQaxtnSTpBLI1ORqFKHh8YitRxxOPxO5795e/zs/nPZv4dxzsGBgbGbRnJcslzgsx3L1MxMDA2YExeZRIJ80/24p0xMDAwTjfLg3IefDEwMDDeF3DPVztP/r7odwMDA+MrGflhMj+CTg6ubzyLY2Bg3JBRDaOffH5jfwMDA+MmjMdFo/oJrh0YGBhrM87TvvkxNSnJVS9nRGEXAwNjG0a1NFbF562FaE0MDIxFGXnZfTIzTyjzfY+rXg4DA+PrGdXte8W4aou02pbAwMBYm1FtWE7iW7VUV0hMMTAwlmYk6dckpUv+axKsMTAwdmAkC/W2zwP3+Y7RTwIGBsYGjGozMm9MXpssln8xMDAwlmBUA1+1lJ8nfz3Gi6ohBgbGcozkVa66bFFNAXtXMTAwMNZg5NZRd3RQwot2wcDAWJoxAVQDZa9F2jyRY2BgLMeoHk0nIfh8TnUFDAyMfRi9Sw/JxucjD6bJR8TAwNiNkR8pJ0X/XgthlC1iYGDcnJEHyl5ZP0lAe8EXAwNjB0ZSXc+Xy1ue1aJbIcXEwMBYiPEojjxY99oM1fCNgYGxA6PaMpw0IKOSWXwFpNkExcDAuC0jCbLVtuLk+NoMuBgYGBswegfaSRJ5FMcLGAYGBkarbdmbk8z8550xMDAwLrocdtnVijzfxMDAWIiRHGInF8Lysn6Th4GBsTTjM2X9/MP1kksMDIxFGT8b59sZ7AUK8gAAAABJRU5ErkJggg==">分享</a><div class="tags"><a href="/tags/git/">git</a></div><div class="post-nav"><a class="pre" href="/2016/04/24/14-04上面安装LEMP/">如何在 Ubuntu 14.04上面安装Linux, nginx, MySQL, PHP (LEMP)</a><a class="next" href="/2015/08/18/我在广工大的这一年/">我在广工大的这一年</a></div><div id="container"></div><link rel="stylesheet" href="/css/default.css?v=0.0.0"><script src="/js/gitment.browser.js?v=0.0.0"></script><script>var gitment = new Gitment({
+  owner: 'johannlai## Your GitHub ID, e.g. username',
+  repo: 'johannlai.github.io## The repository to store your comments, make sure you're the repo's owner, e.g. imsun.github.io',
+  oauth: {
+    client_id: '74c460b19b433fc48e51',
+    client_secret: 'b9bc48aee0871c1e515c4cc3e6f3c78ff0ba7e2e',
+  },
+})
+gitment.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分享/">分享</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分享/笔记/">笔记</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/debug/">debug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/">分享</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/笔记/">笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/笔记/MySQL/">MySQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/翻译/">翻译</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/翻译/">翻译</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/资源/">资源</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/MySql/" style="font-size: 15px;">MySql</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/debug/" style="font-size: 15px;">debug</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/Ajax/" style="font-size: 15px;">Ajax</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/居中/" style="font-size: 15px;">居中</a> <a href="/tags/locahost/" style="font-size: 15px;">locahost</a> <a href="/tags/Django/" style="font-size: 15px;">Django</a> <a href="/tags/laravel/" style="font-size: 15px;">laravel</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/DOM/" style="font-size: 15px;">DOM</a> <a href="/tags/网络安全/" style="font-size: 15px;">网络安全</a> <a href="/tags/学校/" style="font-size: 15px;">学校</a> <a href="/tags/学习/" style="font-size: 15px;">学习</a> <a href="/tags/服务器/" style="font-size: 15px;">服务器</a> <a href="/tags/tmux/" style="font-size: 15px;">tmux</a> <a href="/tags/screen/" style="font-size: 15px;">screen</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/07/test-ci/">测试 CI 自动构建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/ready/">文档就绪事件（`document ready`）的兼容问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/ssh-broken/">ssh连接linux服务器不断开方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/recursion/">遍历一个对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/safe/">Web安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/mysql-slow-query-log/">MySQL优化笔记----慢查询日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/localhost/">localhost----从坑谈起</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/mysql-远程login/">JavaScript学习笔记----浅谈Ajax</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/RegExp/">同学你该复习正则表达式了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/ajax/">MySQL远程连接ERROR 2003 (HY000):Can't connect to MySQL server on'XXXXX'(111) 的问题</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://zhangxiang958.github.io" title="Shawn's blog" target="_blank">Shawn's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Johann Lai's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = '//hm.baidu.com/hm.js?' + '683f84f5e60a117252caaf135802f17f## Your Baidu Analytics tracking id, e.g. 8006843039519956000';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
