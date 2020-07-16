@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>React 的生命周期的使用场景 | Johann Lai's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/7.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">React 的生命周期的使用场景</h1><a id="logo" href="/.">Johann Lai's Blog</a><p class="description">Stay hungry，Stay foolish.</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 文章</i></a><a href="/about/"><i class="fa fa-user"> 关于我</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">React 的生命周期的使用场景</h1><div class="post-meta">Jul 16, 2020<span> | </span><span class="category"><a href="/categories/技术/">技术</a><a href="/categories/技术/翻译/">翻译</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="https://cdn-images-1.medium.com/max/2000/1*XcGM-8E_hGl4fpAr9wJIsA.png"></p>
+<p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<ul>
+<li><a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+</the></li>
+</ul>
+<p>原文链接： <a href="https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1" target="_blank" rel="noopener">React Lifecycle Methods- how and when to use them
+</a><br>作者： Scott DomesFollow  Front-End/Mobile Developer @ MuseFind.<br>翻译： <a href="http://johannlai.com" target="_blank" rel="noopener">johannlai</a></p>
+<p>上面这个图片，就是 <strong>React</strong> 组件的生命周期，从形成 (pre-mounting)到销毁 (unmounting)的过程。</p>
+<p><strong>React</strong> 的优雅之处就在于，它把复杂的 UI 分解成很小的部分。 我们不仅仅可以划分我们的应用，而且我们还可以定制我们每一个组件。</p>
+<p>通过组件的生命周期方法，我们可以控制当UI的每个微小部分渲染，更新，重新渲染，直到完全消失时会发生什么事情。</p>
+<p>让我们开始吧！</p>
+<h2 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a>componentWillMount</h2><p>您的组件将很快就会出现在屏幕上面。这个渲染功能与其所有精美的 JSX 一样，即将被调用。那你想做用她来做什么？</p>
+<p>答案是…  <code>componentWillMount</code> 用处不会太大。</p>
+<p>componentWillMount 所处的生命周期是，没有组件可以玩，所以你不能做任何涉及DOM的事情。（译者：因为还没渲染组件）</p>
+<p>此外，自从您组件的构造函数（ constructor  ）被调用以来，没有任何变化，但是，无论如何，您至少应该可以在<code>componentWillMount</code> 的时候设置组件的默认配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> calss Sidebar extends Component &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      analyticsOpen: <span class="literal">false</span>,</span><br><span class="line">      requirementsOpen: <span class="literal">false</span>,</span><br><span class="line">      barndInfoOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在您的组件处于默认位置，所以不需要额外的生命周期方法，几乎所有的东西都应该由其余的组件代码来处理。</p>
+<p>例外的是，你需要的是只能在运行时完成的任何设置，说白了也就是连接到外部 API 。举个栗子，如果您的应用程序使用 Firebase ，则需要在应用程序首次挂载（mounting）时进行设置。</p>
+<p>但关键是，这样的配置应该在应用程序的最高级别组件（根组​​件）的进行。 这意味着99％的组件应该不能使用 <code>componentWillMount</code> 。</p>
+<p>您可能会看到有人使用<code>componentWillMount</code>启动 AJAX 调用来加载组件的数据。 <strong>千万不要这样做</strong>，我们马上就会聊到这个。</p>
+<p><strong>接下来，更有用的方法是：</strong><br><strong>最常见的用例：</strong> 您的根组件中的应用程序配置。<br><strong>可以调用setState：</strong>不要。改用默认状态（ default state ）。</p>
+<h2 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h2><p>现在您的组件在那里，挂载了并准备好使用了。接下来你将要进行什么操作 ？</p>
+<p>这里是您加载数据的位置。我会让 <a href="https://twitter.com/tylermcginnis33" target="_blank" rel="noopener">Tyler McGinnis</a> 解释为什么：</p>
+<blockquote>
+<p>You can’t guarantee the AJAX request won’t resolve before the component mounts. If it did, that would mean that you’d be trying to setState on an unmounted component, which not only won’t work, but React will yell at you for. Doing AJAX in componentDidMount will guarantee that there’s a component to update.</p>
+</blockquote>
+<blockquote>
+<p>您不能保证在组件挂载之前，AJAX请求已经 resolve 。如果这样做，那意味着你会尝试在一个未挂载的组件上设置 SetState，这不仅不会起作用，反而 React 会对你大喊大叫。在 componentDidMount 中执行 AJAX 将保证至少有已经渲染的组件需要更新。</p>
+</blockquote>
+<p><code>ComponentDidMount</code> 是一个允许你做很多你平时在没有组件的时候不能做的事情。 下面举几个栗子：</p>
+<ul>
+<li>绘制您刚刚渲染的<canvas>元素</canvas></li>
+<li>从元素集合初始化 masonry 网格布局</li>
+<li>增加事件监听器</li>
+</ul>
+<p>基本上，你可以在这里做任何刚刚因为没有 DOM 而不能做的设置，并且可以获取你所需要的全部数据。</p>
+<p><strong>最常见的用例：</strong> 启动<code>AJAX</code>调用，以加载组件的数据。<br><strong>可以调用setState</strong>：是的。</p>
+<h2 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h2><p>我们的组成部分工作得很好，突然之间，一大堆新的 <code>props</code> 到达了，使到组件处于混乱状态。</p>
+<p>这很有可能是一些由父组件的<code>componentDidMount</code>加载的数据终于到达，并被传递下来。</p>
+<p>在我们的组件对新的 <code>props</code> 进行任何操作之前，将用下一<code>props</code> 作为参数调用<code>componentWillReceiveProps</code>。</p>
+<p>&lt;img alt=”componentWillReceiveProps” src=”<a href="https://cdn-images-1.medium.com/max/800/1*u3rXB0qKor51Qb_R1laPjw.png&quot;" target="_blank" rel="noopener">https://cdn-images-1.medium.com/max/800/1*u3rXB0qKor51Qb_R1laPjw.png&quot;</a></p>
+<p>现在，我们正在处于一个很有趣的地方，我们可以（通过nextProps）访问下一个 <code>props</code> 和（通过this.props）访问我们当前的 <code>props</code> 。</p>
+<p>下面这些是我们在<code>componentWillReceiveProps</code> 中需要做的：</p>
+<ul>
+<li>检查哪些<code>props</code> 会改变（使用componentWillReceiveProps的警告 - 有时它什么也没有改变时被调用; React 只是想做一个检查）</li>
+<li>如果<code>props</code> 会以重要的方式改变 <code>props</code>，就行动。</li>
+</ul>
+<p>下面是一个例子。假设我们在上面提到，我们有一个 <canvas> 元素。假设我们根据 <code>this.props.percent</code> 绘制一个很好的圆形图形。</canvas></p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*SXFIS2pwJ0znpmBjDUfxCQ.png" alt="看起来很不错"></p>
+<p>当我们收到新的<code>props</code> ，例如百分比发生变化，我们想重新绘制网格。可以参考以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">componentWillReceiveProps( nextProp ) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.props.percent !== nextProps.percent) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setUpCirCle(nextProps.percent)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 在初始渲染时不调用 componentWillReceiveProps 。<br>我的意思是在技术上，组件正在接收<code>props</code>，但没有任何旧的<code>props</code>要比较，所以…不算。</p>
+<p>最常见的用例：根据特定的<code>props</code>，更改来触发状态（state）转换。<br>是否可以调用<code>setState</code>: Yes</p>
+<h2 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h2><p>现在我们的组件越来越紧张了。</p>
+<p>我们有新的<code>props</code>。典型的<code>React</code>教条告诉我们，当一个组件接收到新的<code>props</code>或新的<code>state</code>时，它应该更新。</p>
+<p>但是我们的组件会先征求我们的同意。</p>
+<p>这是我们所需要的 —— <code>shouldComponentUpdate</code>方法，以 <code>nextProps</code> 为第一个参数，<code>nextState</code>是第二个参数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.props.engagement !== nextProps,engagement</span><br><span class="line">    || nextState.input !== <span class="keyword">this</span>.state.input</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>shouldComponentUpdate应该总是返回一个布尔值 —— 就像这个问题的答案<br>–&gt; “我可以渲染吗？”<br>–&gt; 是的，小组件，你可以去渲染。</p>
+<p>默认情况下它总是返回<code>true</code>。</p>
+<p>如果您担心浪费渲染，那么 shouldComponentUpdate 是您提高性能的好地方。</p>
+<p>我以这种方式写了一篇关于使用shouldComponentUpdate的文章 - 看看：</p>
+<blockquote>
+<p><a href="https://engineering.musefind.com/how-to-benchmark-react-components-the-quick-and-dirty-guide-f595baf1014c" target="_blank" rel="noopener">How to Benchmark React Components: The Quick and Dirty Guide</a></p>
+</blockquote>
+<p>在这篇文章中，我们谈论一个有很多 fields 的表格。他遇到的问题是，当表重新渲染时，每个字段也将重新渲染，速度很慢，效率很低。</p>
+<p><code>ShouldComponentUpdate</code>允许这样操作：只有当所关心的<code>props</code>的改变的时候才更新！</p>
+<blockquote>
+<p>但请记住，如果您设置并忘记它，可能会导致重大问题，因为您的React组件将无法正常更新。所以谨慎使用。</p>
+</blockquote>
+<p><strong>最常见的用例：</strong> 当您的组件 <code>re-render</code> (重新渲染)时，完全控制。<br><strong>是否可以调用<code>setState</code>:</strong>  No</p>
+<h2 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate"></a>componentWillUpdate</h2><p>哇，现在我们允许更新了。”希望我在重新渲染之前先做任何事情?” 我们的组件问。不，我们说。停止打扰我们。</p>
+<p>在整个 MuseFind 代码库中，我们从不使用 componentWillUpdate。在功能上，它基本上与<code>componentWillReceiveProps</code>相同，除非你不允许调用<code>this.setState</code>。</p>
+<p>如果您正在使用<code>shouldComponentUpdate</code> 并且需要在<code>props</code>更改时执行某些操作，那么<code>componentWillUpdate</code>才会很有意义。</p>
+<p><strong>最常见的用例：</strong> 在一个也有shouldComponentUpdate（但不能访问以前的<code>props</code>）的组件上使用而不是<code>componentWillReceiveProps</code>。</p>
+<p><strong>是否可以调用<code>setState</code>:</strong>  No</p>
+<h2 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h2><p>很棒！小组件！</p>
+<p>在这里我们可以和<code>componentDidMount</code>做同样的事情 ： 重新设置我们的 masonry 布局，重绘我们的canvas,等。</p>
+<p>等等 - 我们没有在<code>componentWillReceiveProps</code>中重画我们的<code>canvas</code>吗？</p>
+<p>是的我们没有这样做。原因是：<code>在componentDidUpdate</code> 中，你不知道为什么它更新。</p>
+<p>因此，如果我们的组件接收到的<code>canvas</code>数量超过了与我们的<code>canvas</code>相关的<code>props</code>，我们不希望每次更新时都会浪费时间重绘<code>canvas</code>上面。</p>
+<p>这并不意味着<code>componentDidUpdate</code>没有用。要回到我们的 masonry 布局示例，我们要在DOM自身更新后重新排列网格，所以我们使用<code>componentDidUpdate</code>来完成。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentDidUpdate() &#123;</span><br><span class="line">  <span class="keyword">this</span>.createGrid()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>最常见的用例：</strong>更新DOM以响应<code>prop</code>或<code>state</code>更改。<br><strong>是否可以调用<code>setState</code>:</strong>  Yes</p>
+<h2 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h2><p>几乎结束了~</p>
+<p>你的组件将会消失。也许永远，这很伤心。</p>
+<p>在它离开之前，它仍然会询问你是否有任何最后的请求。</p>
+<p>在这里，您可以取消任何传出的网络请求，或删除与组件关联的所有事件监听器。</p>
+<p>基本上，清理任何只涉及到有关的组件的事情，<br>当它走了，它应该完全消失。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentWillUnmount() &#123;</span><br><span class="line">  <span class="built_in">window</span>.removeEventListen(<span class="string">'resize'</span>, <span class="keyword">this</span>,resizeListener)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>最常见的用例：</strong>清理组件中残留的残留物。<br><strong>是否可以调用<code>setState</code>:</strong>  No</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在理想的世界中，我们不会使用生命周期方法。我们所有的渲染问题都将通过<code>state</code> 和 <code>prop</code>进行控制。</p>
+<p>事实上并不存在一个理想的世界，有时您需要更准确地控制组件更新的方式和时间。</p>
+<p>谨慎使用这些方法，并小心使用。我希望这篇文章有助于阐明什么时候和如何使用生命周期方法。</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a class="article-share-link" data-url="http://yoursite.com/2020/07/16/React Lifecycle Methods/" data-id="ckco2w3bm0007l3t8jv9s9q1h" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aS27DMAwFwNz/0i7QbVD5kbILmB6tgsJRNF6w4ufzidfxu/Inv5///vuxXJ87FgYGxmMZyXZ/bb0+dO+ZJhUDA+MFjHWQXQfQdYjskfKzYWBgYCQXuyp7/esYGBgYVwXcPJgmIbV3JcXAwHgbI9luv0DWC+IX5+IYGBgPZPR+/n8+39jfwMDAeAjj2Fh5gzO/CPZOhYGBMZuRJJ9J27IHzjFRIMbAwHgx46qAe1VL4M89MTAwRjPyTXspaLV5sFVWw8DAGMrIN72qANfb/yRkY2BgjGZUL2q9ZmdvgKMciDEwMMYxeuMOPeoO8uScGBgYoxm9AllvCKzXHthqZmBgYAxi5EMPeemtGkbzcY2T9BUDA2McIynT94Yt7msDnEy3YWBgjGP0ymeFWL5dDSuU6jAwMIYyqoNZvYGM5BVc3IPFwMAYzeg1FKulsWSHwtkwMDBez8hDZLUNsL6Y5rthYGDMZvQalnlCG13sWt9qtjAxMDAezqgmscnRd5LkcrMTAwPjNYxyV6EViPOd81/HwMCYzagmqzstgTz1rV4cMTAwpjKO4qqGzmsT4KjQhoGBMY6RryS89m5rOy+ojMHAwHgsIwmyedugmu72Am75vwcGBsYIRq/UVR0O24n6JzAMDAyMYmDdL/rng2IYGBgYO9e19bduzLMxMDCGMpIktjpaWmVsNQMwMDBGM3qNgSqvV27LXw0GBsZQxg+WO7wqNHrJ/wAAAABJRU5ErkJggg==">分享</a><div class="tags"><a href="/tags/React/">React</a></div><div class="post-nav"><a class="pre" href="/2020/07/16/safe/">Web安全</a><a class="next" href="/2020/07/16/Observer/">JQuery中的设计模式 ——Observer (观察者)模式</a></div><div id="container"></div><link rel="stylesheet" href="/css/default.css?v=0.0.0"><script src="/js/gitment.browser.js?v=0.0.0"></script><script>var gitment = new Gitment({
+  owner: 'johannlai## Your GitHub ID, e.g. username',
+  repo: 'johannlai.github.io## The repository to store your comments, make sure you're the repo's owner, e.g. imsun.github.io',
+  oauth: {
+    client_id: '74c460b19b433fc48e51',
+    client_secret: 'b9bc48aee0871c1e515c4cc3e6f3c78ff0ba7e2e',
+  },
+})
+gitment.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分享/">分享</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分享/笔记/">笔记</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/debug/">debug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/">分享</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/笔记/">笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/笔记/MySQL/">MySQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/分享/翻译/">翻译</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/教程/">教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/翻译/">翻译</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/资源/">资源</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/MySql/" style="font-size: 15px;">MySql</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/debug/" style="font-size: 15px;">debug</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/居中/" style="font-size: 15px;">居中</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/locahost/" style="font-size: 15px;">locahost</a> <a href="/tags/Django/" style="font-size: 15px;">Django</a> <a href="/tags/laravel/" style="font-size: 15px;">laravel</a> <a href="/tags/Ajax/" style="font-size: 15px;">Ajax</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/DOM/" style="font-size: 15px;">DOM</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/网络安全/" style="font-size: 15px;">网络安全</a> <a href="/tags/服务器/" style="font-size: 15px;">服务器</a> <a href="/tags/tmux/" style="font-size: 15px;">tmux</a> <a href="/tags/screen/" style="font-size: 15px;">screen</a> <a href="/tags/学校/" style="font-size: 15px;">学校</a> <a href="/tags/学习/" style="font-size: 15px;">学习</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/localhost/">localhost----从坑谈起</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/mysql-slow-query-log/">MySQL优化笔记----慢查询日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/React-Interview-Questions/">React 常见的面试题（在 React 里面，你可以知道也可以不知道的事, 但是你会发现他们确实很有用）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/RegExp/">同学你该复习正则表达式了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/ajax/">MySQL远程连接ERROR 2003 (HY000):Can't connect to MySQL server on'XXXXX'(111) 的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/css-center/">CSS学习笔记----水平居中、垂直居中、水平垂直居中方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/ssh-broken/">ssh连接linux服务器不断开方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/safe/">Web安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/React Lifecycle Methods/">React 的生命周期的使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/16/Observer/">JQuery中的设计模式 ——Observer (观察者)模式</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://zhangxiang958.github.io" title="Shawn's blog" target="_blank">Shawn's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">Johann Lai's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = '//hm.baidu.com/hm.js?' + '683f84f5e60a117252caaf135802f17f## Your Baidu Analytics tracking id, e.g. 8006843039519956000';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
